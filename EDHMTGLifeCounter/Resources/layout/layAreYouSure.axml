@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Are you sure you want to reset?"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:gravity="center" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout1">
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:gravity="center_horizontal">
+            <Button
+                android:text="Okay"
+                android:layout_column="0"
+                android:id="@+id/btnOkayDiag" />
+            <Button
+                android:text="Cancel"
+                android:layout_column="1"
+                android:id="@+id/btnCancelDiag" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

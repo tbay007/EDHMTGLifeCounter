@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView a:layout_width="fill_parent" a:layout_height="wrap_content" 
+            xmlns:a="http://schemas.android.com/apk/res/android">
+  <LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+      p1:orientation="vertical"
+      p1:layout_width="match_parent"
+      p1:layout_height="match_parent"
+      p1:id="@+id/linearLayout1"
+      p1:scrollbarAlwaysDrawVerticalTrack="false"
+      p1:scrollbars="vertical"
+      p1:scrollbarStyle="insideOverlay">
+    <Button
+        p1:text="Reset"
+        p1:id="@+id/btnReset"
+        p1:gravity="center"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content" />
+    <TextView
+        p1:text="40"
+        p1:textAppearance="?android:attr/textAppearanceLarge"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/txtHealth"
+        p1:gravity="center"
+        p1:textSize="250dip" />
+    <Button
+        p1:text="Amount Changed"
+        p1:id="@+id/btnAddAmount"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content" />
+    <TableLayout
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/tableLayout1">
+      <TableRow
+          p1:id="@+id/tableRow1"
+          p1:gravity="center">
+      </TableRow>
+      <TableRow
+          p1:id="@+id/tableRow2"
+          p1:gravity="center"
+          p1:layout_height="72.5dp"
+          p1:layout_marginBottom="30dp">
+        <Button
+            p1:text="-1"
+            p1:layout_column="0"
+            p1:id="@+id/btnSubtractOne" />
+        <Button
+            p1:text="+1"
+            p1:layout_column="1"
+            p1:id="@+id/btnAddOne"
+            p1:layout_marginRight="1.0dp" />
+      </TableRow>
+      <TableRow
+          p1:id="@+id/tableRow3"
+          p1:gravity="center">
+      </TableRow>
+    </TableLayout>
+  </LinearLayout>
+</ScrollView>
