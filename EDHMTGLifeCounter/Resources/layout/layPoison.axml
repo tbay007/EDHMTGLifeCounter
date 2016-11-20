@@ -17,14 +17,14 @@
             a:layout_width="match_parent"
             a:layout_height="wrap_content" />
         <TextView
-            a:text="40"
+            a:text="0"
             a:textAppearance="?android:attr/textAppearanceLarge"
             a:layout_width="match_parent"
             a:layout_height="wrap_content"
             a:id="@+id/txtHealth"
             a:gravity="center"
             a:textSize="250dip"
-            a:textColor="@android:color/holo_blue_light" />
+            a:textColor="@android:color/holo_green_dark" />
         <Button
             a:text="Amount Changed"
             a:id="@+id/btnAddAmount"
@@ -52,10 +52,6 @@
                     a:layout_column="1"
                     a:id="@+id/btnAddOne"
                     a:layout_marginRight="1.0dp" />
-            </TableRow>
-            <TableRow
-                a:id="@+id/tableRow3"
-                a:gravity="center">
             </TableRow>
         </TableLayout>
     </LinearLayout>

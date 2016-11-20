@@ -14,18 +14,43 @@ namespace EDHMTGLifeCounter
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            
+            ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.LifeCounter);
+            ActionBar.Tab tab = ActionBar.NewTab();
+            tab.SetText("Life");
+            
+            tab.TabSelected += (sender, args) =>
+            {
+                SetContentView(Resource.Layout.LifeCounter);
+                SetupLifeMainView();
+            };
+            ActionBar.AddTab(tab);
+
+            tab = ActionBar.NewTab();
+            tab.SetText("Poison");
+
+            tab.TabSelected += (sender, args) =>
+            {
+                SetContentView(Resource.Layout.layPoison);
+            };
+            ActionBar.AddTab(tab);
+
+            tab = ActionBar.NewTab();
+            
+            tab.SetText("Commander");
+
+            tab.TabSelected += (sender, args) =>
+            {
+                SetContentView(Resource.Layout.layCommander);
+            };
+            ActionBar.AddTab(tab);
             ActionBar.Title = "EDH MTG Life Counter";
+        }
 
-            var metrics = Resources.DisplayMetrics;
-            var widthInDp = ConvertPixelsToDp(metrics.WidthPixels);
-            var heightInDp = ConvertPixelsToDp(metrics.HeightPixels);
-
-            TableLayout tabLayout = FindViewById<TableLayout>(Resource.Id.tableLayout1);
-            var parameters = tabLayout.LayoutParameters;
-            //parameters.
-
+        private void SetupLifeMainView()
+        {
             Button addFiveButton = FindViewById<Button>(Resource.Id.btnAddAmount);
             Button addOneButton = FindViewById<Button>(Resource.Id.btnAddOne);
             Button subtractOneButton = FindViewById<Button>(Resource.Id.btnSubtractOne);
@@ -37,6 +62,7 @@ namespace EDHMTGLifeCounter
 
             reset.Click += delegate { ResetHealth(); };
         }
+
         private int ConvertPixelsToDp(float pixelValue)
         {
             var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
@@ -49,43 +75,47 @@ namespace EDHMTGLifeCounter
             dia.SetTitle("Enter amount (Ex: -5 or 5): ");
             dia.SetContentView(Resource.Layout.layAmount);
             Button cancelButton = dia.FindViewById<Button>(Resource.Id.btnCancelDialog);
-            cancelButton.Click += delegate { dia.Dismiss(); };
+            
 
             Button addAmountButton = dia.FindViewById<Button>(Resource.Id.btnAddAmountDialog);
             EditText amount = dia.FindViewById<EditText>(Resource.Id.txtAmountDialog);
-
-
+            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            cancelButton.Click += delegate 
+            {
+                HideKeyboard(amount, imm);
+                dia.Dismiss();
+            };
             addAmountButton.Click += delegate {
                 amount = dia.FindViewById<EditText>(Resource.Id.txtAmountDialog);
                 TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
                 txtHelth.Text = (Convert.ToInt32(txtHelth.Text) + Convert.ToInt32(amount.Text)).ToString();
+                HideKeyboard(amount, imm);
                 dia.Dismiss();
             };
-
             dia.Show();
-            //dia.ShowEvent += delegate { cancelButton.RequestFocus(); amount.RequestFocus(); };
-            amount.ShowSoftInputOnFocus = true;
-            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
-
-            imm.ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.None);
+            ShowKeyboard(amount, imm);
             dia.DismissEvent += delegate
             {
-                imm.ToggleSoftInput(ShowFlags.Implicit, HideSoftInputFlags.None);
-                imm.Dispose();
+                HideKeyboard(amount, imm);
             };
         }
 
-        public void onFocusChange(View v, bool hasFocus)
+        public static void ShowKeyboard(View pView, InputMethodManager imm)
         {
-            if (hasFocus)
-            {
-                
-                //parentActivity
-                //        .getWindow()
-                //        .setSoftInputMode(
-                //                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-            }
+            pView.RequestFocus();
+
+            imm.ShowSoftInput(pView, ShowFlags.Forced);
+            imm.ToggleSoftInput(ShowFlags.Forced, HideSoftInputFlags.ImplicitOnly);
         }
+
+        public static void HideKeyboard(View pView, InputMethodManager imm)
+        {
+            
+            pView.ClearFocus();
+
+            imm.HideSoftInputFromWindow(pView.WindowToken, HideSoftInputFlags.None);
+        }
+
         private void AddOneHealth()
         {
             TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
