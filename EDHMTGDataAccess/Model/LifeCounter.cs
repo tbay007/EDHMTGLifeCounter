@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace EDHMTGLifeCounter.ViewModel
+namespace EDHMTGDataAccess.Model
 {
     public class LifeCounter : Base
     {
@@ -21,18 +21,6 @@ namespace EDHMTGLifeCounter.ViewModel
         public bool CheckPoisonCounterDeath()
         {
             if (PoisonDamageCounter >= 10)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool CheckCommanderCounterDeath()
-        {
-            if (CommanderDamageCounter >= 21)
             {
                 return true;
             }

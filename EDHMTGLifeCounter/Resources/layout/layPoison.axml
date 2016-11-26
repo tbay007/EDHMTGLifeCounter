@@ -10,12 +10,6 @@
         a:scrollbarAlwaysDrawVerticalTrack="false"
         a:scrollbars="vertical"
         a:scrollbarStyle="insideOverlay">
-        <Button
-            a:text="Reset"
-            a:id="@+id/btnReset"
-            a:gravity="center"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content" />
         <TextView
             a:text="0"
             a:textAppearance="?android:attr/textAppearanceLarge"
@@ -23,7 +17,7 @@
             a:layout_height="wrap_content"
             a:id="@+id/txtHealth"
             a:gravity="center"
-            a:textSize="250dip"
+            a:textSize="200dip"
             a:textColor="@android:color/holo_green_dark" />
         <Button
             a:text="Amount Changed"
