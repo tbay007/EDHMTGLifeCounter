@@ -39,6 +39,13 @@ namespace EDHMTGLifeCounter
                 mainActivityModel = Translate(model);
             }
 
+            SetupTabs(conn, model);
+            
+            ActionBar.Title = "EDH MTG Life Counter";
+        }
+
+        private void SetupTabs(EDHMTGDataAccess.SqliteConnection conn, EDHMTGDataAccess.Model.LifeCounter model)
+        {
             ActionBar.Tab tab = ActionBar.NewTab();
             tab.SetText("Life");
 
@@ -75,9 +82,6 @@ namespace EDHMTGLifeCounter
                 SetupLifeMainView(Translate(model));
             };
             ActionBar.AddTab(tab);
-
-
-            ActionBar.Title = "EDH MTG Life Counter";
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -112,7 +116,7 @@ namespace EDHMTGLifeCounter
             okayButton.Click += delegate
             {
                 TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
-
+                
                 mainActivityModel.Life = 40;
                 mainActivityModel.PoisonDamageCounter = 0;
                 mainActivityModel.CommanderDamageCounter = 0;
@@ -136,7 +140,7 @@ namespace EDHMTGLifeCounter
 
         private void SetupLifeMainView(ViewModel.LifeCounter ViewModel)
         {
-            Button addFiveButton = FindViewById<Button>(Resource.Id.btnAddAmount);
+            TextView txthealt = FindViewById<TextView>(Resource.Id.txtHealth);
             Button addOneButton = FindViewById<Button>(Resource.Id.btnAddOne);
             Button subtractOneButton = FindViewById<Button>(Resource.Id.btnSubtractOne);
             TextView counterText = FindViewById<TextView>(Resource.Id.txtHealth);
@@ -154,8 +158,7 @@ namespace EDHMTGLifeCounter
                 counterText.Text = ViewModel.CommanderDamageCounter.ToString();
 
             }
-
-            addFiveButton.Click += delegate { AddFiveHealth(); };
+            txthealt.Click += delegate { AddFiveHealth(); };
             addOneButton.Click += delegate { AddOneHealth(mainActivityModel); };
             subtractOneButton.Click += delegate { SubtractOneHealth(mainActivityModel); };
 
@@ -325,43 +328,7 @@ namespace EDHMTGLifeCounter
             }
 
         }
-
-        private void ResetHealth(ViewModel.LifeCounter ViewModel)
-        {
-            Dialog dia = new Dialog(this);
-            dia = new Dialog(this);
-            dia.RequestWindowFeature((int)WindowFeatures.NoTitle);
-            dia.SetContentView(Resource.Layout.layAreYouSure);
-
-            Button cancelButton = dia.FindViewById<Button>(Resource.Id.btnCancelDiag);
-            cancelButton.Click += delegate { dia.Dismiss(); };
-
-            Button okayButton = dia.FindViewById<Button>(Resource.Id.btnOkayDiag);
-            okayButton.Click += delegate
-            {
-                TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
-                if (ActionBar.SelectedTab.Position == 0)
-                {
-                    mainActivityModel.Life = 40;
-                    txtHelth.Text = mainActivityModel.Life.ToString();
-
-                }
-                else if (ActionBar.SelectedTab.Position == 1)
-                {
-                    mainActivityModel.PoisonDamageCounter = 0;
-                    txtHelth.Text = mainActivityModel.PoisonDamageCounter.ToString();
-                }
-                else if (ActionBar.SelectedTab.Position == 2)
-                {
-                    mainActivityModel.CommanderDamageCounter = 0;
-                    txtHelth.Text = mainActivityModel.CommanderDamageCounter.ToString();
-                }
-
-                dia.Dismiss();
-            };
-            dia.Show();
-        }
-
+        
         private void CheckIfLost(int selectedTab)
         {
 

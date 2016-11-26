@@ -19,11 +19,6 @@
             a:gravity="center"
             a:textSize="200dip"
             a:textColor="@android:color/holo_green_dark" />
-        <Button
-            a:text="Amount Changed"
-            a:id="@+id/btnAddAmount"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content" />
         <TableLayout
             a:layout_width="match_parent"
             a:layout_height="wrap_content"
