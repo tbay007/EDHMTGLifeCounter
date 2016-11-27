@@ -195,7 +195,15 @@ namespace EDHMTGLifeCounter
                     amount = dia.FindViewById<EditText>(Resource.Id.txtAmountDialog);
                     TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
                     mainActivityModel.Life = Convert.ToInt16(amount.Text) + Convert.ToInt32(txtHelth.Text);
-                    txtHelth.Text = (mainActivityModel.Life).ToString();
+                    if (mainActivityModel.Life <= 0)
+                    {
+                        txtHelth.Text = (0).ToString();
+                        mainActivityModel.Life = 0;
+                    }
+                    else
+                    {
+                        txtHelth.Text = (mainActivityModel.Life).ToString();
+                    }
                     HideKeyboard(amount, imm);
                     dia.Dismiss();
                 };
@@ -213,7 +221,15 @@ namespace EDHMTGLifeCounter
                     amount = dia.FindViewById<EditText>(Resource.Id.txtAmountDialog);
                     TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
                     mainActivityModel.PoisonDamageCounter = Convert.ToInt16(amount.Text) + Convert.ToInt32(txtHelth.Text);
-                    txtHelth.Text = (mainActivityModel.PoisonDamageCounter).ToString();
+                    if (mainActivityModel.PoisonDamageCounter <= 0)
+                    {
+                        txtHelth.Text = (0).ToString();
+                        mainActivityModel.PoisonDamageCounter = 0;
+                    }
+                    else
+                    {
+                        txtHelth.Text = (mainActivityModel.PoisonDamageCounter).ToString();
+                    }
                     HideKeyboard(amount, imm);
                     dia.Dismiss();
                 };
@@ -231,7 +247,15 @@ namespace EDHMTGLifeCounter
                     amount = dia.FindViewById<EditText>(Resource.Id.txtAmountDialog);
                     TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
                     mainActivityModel.CommanderDamageCounter = Convert.ToInt16(amount.Text) + Convert.ToInt32(txtHelth.Text);
-                    txtHelth.Text = (mainActivityModel.CommanderDamageCounter).ToString();
+                    if (mainActivityModel.CommanderDamageCounter <= 0)
+                    {
+                        txtHelth.Text = (0).ToString();
+                        mainActivityModel.CommanderDamageCounter = 0;
+                    }
+                    else
+                    {
+                        txtHelth.Text = (mainActivityModel.CommanderDamageCounter).ToString();
+                    }
                     HideKeyboard(amount, imm);
                     dia.Dismiss();
                 };

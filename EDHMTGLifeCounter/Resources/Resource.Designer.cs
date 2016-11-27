@@ -65,8 +65,8 @@ namespace EDHMTGLifeCounter
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06000e
-			public const int action_reset = 2131099662;
+			// aapt resource value: 0x7f06000d
+			public const int action_reset = 2131099661;
 			
 			// aapt resource value: 0x7f060001
 			public const int btnAddAmountDialog = 2131099649;
@@ -97,9 +97,6 @@ namespace EDHMTGLifeCounter
 			
 			// aapt resource value: 0x7f06000a
 			public const int tableRow2 = 2131099658;
-			
-			// aapt resource value: 0x7f06000d
-			public const int tableRow3 = 2131099661;
 			
 			// aapt resource value: 0x7f060003
 			public const int textView1 = 2131099651;

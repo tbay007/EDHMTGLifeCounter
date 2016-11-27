@@ -24,23 +24,23 @@
             a:layout_height="wrap_content"
             a:id="@+id/tableLayout1">
             <TableRow
-                a:id="@+id/tableRow1"
-                a:gravity="center">
-            </TableRow>
-            <TableRow
                 a:id="@+id/tableRow2"
                 a:gravity="center"
                 a:layout_height="72.5dp"
                 a:layout_marginBottom="30dp">
                 <Button
-                    a:text="-1"
+                    a:text="-"
                     a:layout_column="0"
-                    a:id="@+id/btnSubtractOne" />
+                    a:id="@+id/btnSubtractOne"
+                    a:textSize="30dip"
+                    a:textStyle="bold" />
                 <Button
-                    a:text="+1"
+                    a:text="+"
                     a:layout_column="1"
                     a:id="@+id/btnAddOne"
-                    a:layout_marginRight="1.0dp" />
+                    a:layout_marginRight="1.0dp"
+                    a:textSize="30dip"
+                    a:textStyle="bold" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
