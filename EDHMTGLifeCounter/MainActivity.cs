@@ -143,6 +143,7 @@ namespace EDHMTGLifeCounter
             TextView txthealt = FindViewById<TextView>(Resource.Id.txtHealth);
             Button addOneButton = FindViewById<Button>(Resource.Id.btnAddOne);
             Button subtractOneButton = FindViewById<Button>(Resource.Id.btnSubtractOne);
+            
             TextView counterText = FindViewById<TextView>(Resource.Id.txtHealth);
             if (ActionBar.SelectedTab.Position == 0)
             {

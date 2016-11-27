@@ -33,14 +33,16 @@
                     a:textSize="30dip"
                     a:textStyle="bold"
                     a:layout_column="0"
-                    a:id="@+id/btnSubtractOne" />
+                    a:id="@+id/btnSubtractOne"
+                    a:textColor="@android:color/holo_red_dark" />
                 <Button
                     a:text="+"
                     a:layout_column="1"
                     a:textSize="30dip"
                     a:textStyle="bold"
                     a:id="@+id/btnAddOne"
-                    a:layout_marginRight="1.0dp" />
+                    a:layout_marginRight="1.0dp"
+                    a:textColor="@android:color/holo_red_dark" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
