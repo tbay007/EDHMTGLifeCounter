@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="EDHMTGLifeCounter.EDHMTGLifeCounter" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.myapp.edh" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="23" />
 	<application android:label="EDHMTGLifeCounter" android:icon="@drawable/magic_the_gathering_online"></application>
 </manifest>

@@ -8,14 +8,14 @@ using Android.Content;
 
 namespace EDHMTGLifeCounter
 {
-    [Activity(Label = "EDHMTGLifeCounter", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "EDHMTGLifeCounter")]
     public class MainActivity : Activity
     {
         private ViewModel.LifeCounter mainActivityModel = null;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            
             ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.LifeCounter);
