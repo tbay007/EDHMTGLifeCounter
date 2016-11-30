@@ -26,8 +26,6 @@ namespace EDHMTGLifeCounter
 		
 		public static void UpdateIdValues()
 		{
-			global::EDHMTGDataAccess.Resource.String.ApplicationName = global::EDHMTGLifeCounter.Resource.String.ApplicationName;
-			global::EDHMTGDataAccess.Resource.String.Hello = global::EDHMTGLifeCounter.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -170,11 +168,8 @@ namespace EDHMTGLifeCounter
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
-			
 			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			public const int ApplicationName = 2130968576;
 			
 			static String()
 			{

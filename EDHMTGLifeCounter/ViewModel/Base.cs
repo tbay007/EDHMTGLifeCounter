@@ -9,11 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using SQLite;
 
 namespace EDHMTGLifeCounter.ViewModel
 {
     public abstract class Base
     {
+        [AutoIncrement, PrimaryKey]
         public int Id { get; set; }
 
         public bool Inserted { get; set; }

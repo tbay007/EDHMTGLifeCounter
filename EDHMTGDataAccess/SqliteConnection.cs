@@ -9,7 +9,7 @@ namespace EDHMTGDataAccess
         private SQLite.SQLiteConnection conn = null;
         public void SQLiteConnection()
         {           
-            var pathForDB = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "db.sqlite"); 
+            var pathForDB = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "db1.sqlite"); 
             conn = new SQLite.SQLiteConnection(pathForDB, false);
         }
 

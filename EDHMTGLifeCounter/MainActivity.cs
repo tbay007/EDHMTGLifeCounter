@@ -5,6 +5,8 @@ using System;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Content;
+using System.Linq;
+using System.IO;
 
 namespace EDHMTGLifeCounter
 {
@@ -20,7 +22,7 @@ namespace EDHMTGLifeCounter
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.LifeCounter);
 
-            EDHMTGDataAccess.SqliteConnection conn = new EDHMTGDataAccess.SqliteConnection();
+            SqliteConnection conn = new SqliteConnection();
             conn.SQLiteConnection();
             conn.CreateTables();
 
@@ -44,7 +46,7 @@ namespace EDHMTGLifeCounter
             ActionBar.Title = "EDH MTG Life Counter";
         }
 
-        private void SetupTabs(EDHMTGDataAccess.SqliteConnection conn, EDHMTGDataAccess.Model.LifeCounter model)
+        private void SetupTabs(SqliteConnection conn, Model.ModelLifeCounter model)
         {
             ActionBar.Tab tab = ActionBar.NewTab();
             tab.SetText("Life");
@@ -360,7 +362,7 @@ namespace EDHMTGLifeCounter
 
         }
 
-        private ViewModel.LifeCounter Translate(EDHMTGDataAccess.Model.LifeCounter model)
+        private ViewModel.LifeCounter Translate(Model.ModelLifeCounter model)
         {
             ViewModel.LifeCounter returnView = new ViewModel.LifeCounter();
             returnView.CommanderDamageCounter = model.CommanderDamageCounter;
@@ -377,9 +379,9 @@ namespace EDHMTGLifeCounter
             return returnView;
         }
 
-        private EDHMTGDataAccess.Model.LifeCounter Translate(ViewModel.LifeCounter dataModel)
+        private Model.ModelLifeCounter Translate(ViewModel.LifeCounter dataModel)
         {
-            EDHMTGDataAccess.Model.LifeCounter model = new EDHMTGDataAccess.Model.LifeCounter();
+            Model.ModelLifeCounter model = new Model.ModelLifeCounter();
             model.CommanderDamageCounter = dataModel.CommanderDamageCounter;
             model.CreateDate = dataModel.CreateDate;
             model.Deleted = dataModel.Deleted;
@@ -392,6 +394,90 @@ namespace EDHMTGLifeCounter
             model.User = dataModel.User;
 
             return model;
+        }
+    }
+
+    public class SqliteConnection
+    {
+        private SQLite.SQLiteConnection conn = null;
+        public void SQLiteConnection()
+        {
+            var pathForDB = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "db1.sqlite");
+            conn = new SQLite.SQLiteConnection(pathForDB, false);
+        }
+
+        public void CreateTables()
+        {
+            conn.CreateTable<Model.ModelLifeCounter>();
+        }
+
+        public Model.ModelLifeCounter AddLifeCounter(Model.ModelLifeCounter data)
+        {
+            Model.ModelLifeCounter addModel = new Model.ModelLifeCounter();
+            addModel.CommanderDamageCounter = data.CommanderDamageCounter;
+            addModel.CreateDate = DateTime.Now;
+            addModel.Inserted = true;
+            addModel.Life = data.Life;
+            addModel.PoisonDamageCounter = data.PoisonDamageCounter;
+            addModel.Updated = false;
+            addModel.UpdateDate = DateTime.Now;
+            addModel.User = "Test";
+            conn.Insert(addModel);
+            conn.Commit();
+
+            data.Id = addModel.Id;
+            return data;
+        }
+
+        public Model.ModelLifeCounter UpdateLifeCounter(Model.ModelLifeCounter data)
+        {
+            conn.CreateCommand("Select * From ModelLifeCounter where Id = " + data.Id.ToString());
+
+            var model = conn.Query<Model.ModelLifeCounter>("Select * From ModelLifeCounter where Id = " + data.Id.ToString()).SingleOrDefault();
+            model.Deleted = false;
+            model.CommanderDamageCounter = data.CommanderDamageCounter;
+            model.Life = data.Life;
+            model.PoisonDamageCounter = data.PoisonDamageCounter;
+            model.Updated = true;
+            model.UpdateDate = DateTime.Now;
+            model.User = "TestUpdated";
+            conn.Update(model);
+            conn.Commit();
+
+            Model.ModelLifeCounter updatedModel = new Model.ModelLifeCounter();
+            updatedModel.Id = model.Id;
+            updatedModel.Inserted = model.Inserted;
+            updatedModel.CommanderDamageCounter = model.CommanderDamageCounter;
+            updatedModel.CreateDate = model.CreateDate;
+            updatedModel.Deleted = model.Deleted;
+            updatedModel.Life = model.Life;
+            updatedModel.PoisonDamageCounter = model.PoisonDamageCounter;
+            updatedModel.Updated = model.Updated;
+            updatedModel.UpdateDate = model.UpdateDate;
+            updatedModel.User = model.User;
+            return updatedModel;
+        }
+
+        public Model.ModelLifeCounter GetLatestEntry()
+        {
+            var model = conn.Query<Model.ModelLifeCounter>("Select * From ModelLifeCounter").OrderByDescending(x => x.CreateDate).FirstOrDefault();
+
+            Model.ModelLifeCounter updatedModel = new Model.ModelLifeCounter();
+            if (model != null)
+            {
+                updatedModel.Id = model.Id;
+                updatedModel.Inserted = model.Inserted;
+                updatedModel.CommanderDamageCounter = model.CommanderDamageCounter;
+                updatedModel.CreateDate = model.CreateDate;
+                updatedModel.Deleted = model.Deleted;
+                updatedModel.Life = model.Life;
+                updatedModel.PoisonDamageCounter = model.PoisonDamageCounter;
+                updatedModel.Updated = model.Updated;
+                updatedModel.UpdateDate = model.UpdateDate;
+                updatedModel.User = model.User;
+            }
+
+            return updatedModel;
         }
     }
 }

@@ -27,9 +27,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <BundleAssemblies>False</BundleAssemblies>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <Debugger>Xamarin</Debugger>
@@ -48,7 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <BundleAssemblies>False</BundleAssemblies>
@@ -62,6 +62,26 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.2.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.0.1\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.0.1\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.0.1\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.0.1\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Model\ModelLifeCounter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreenActivity.cs" />
@@ -78,6 +99,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <AndroidResource Include="Resources\layout\layAmount.axml">
       <SubType>Designer</SubType>
@@ -113,12 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EDHMTGDataAccess\EDHMTGDataAccess.csproj">
-      <Project>{4f0cb9a9-cdf2-420c-98d1-08848cbe4121}</Project>
-      <Name>EDHMTGDataAccess</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\menu.xml" />
