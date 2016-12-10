@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.myapp.edh" android:versionCode="2" android:versionName="1.01" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="23" />
-	<application android:label="EDHMTGLifeCounter" android:icon="@drawable/magic_the_gathering_online"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.magetech.edh" android:versionCode="5" android:versionName="1.06" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="23" />
+	<application android:label="EDHMTGLifeCounter" android:icon="@drawable/ic_launcher"></application>
 </manifest>

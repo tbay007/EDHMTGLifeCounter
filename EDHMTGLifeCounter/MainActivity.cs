@@ -10,7 +10,7 @@ using System.IO;
 
 namespace EDHMTGLifeCounter
 {
-    [Activity(Label = "EDHMTGLifeCounter")]
+    [Activity(Label = "EDHMTGLifeCounter", ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     public class MainActivity : Activity
     {
         private ViewModel.LifeCounter mainActivityModel = null;
@@ -97,14 +97,16 @@ namespace EDHMTGLifeCounter
             switch (item.ItemId)
             {
                 case Resource.Id.action_reset:
-                    ResetAll();
+                    SqliteConnection conn = new SqliteConnection();
+                    conn.SQLiteConnection();
+                    ResetAll(conn);
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);
             }
         }
 
-        private void ResetAll()
+        private void ResetAll(SqliteConnection conn)
         {
             Dialog dia = new Dialog(this);
             dia = new Dialog(this);
@@ -134,6 +136,7 @@ namespace EDHMTGLifeCounter
                 {
                     txtHelth.Text = mainActivityModel.CommanderDamageCounter.ToString();
                 }
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
 
                 dia.Dismiss();
             };
@@ -142,6 +145,9 @@ namespace EDHMTGLifeCounter
 
         private void SetupLifeMainView(ViewModel.LifeCounter ViewModel)
         {
+            SqliteConnection conn = new SqliteConnection();
+            conn.SQLiteConnection();
+
             TextView txthealt = FindViewById<TextView>(Resource.Id.txtHealth);
             Button addOneButton = FindViewById<Button>(Resource.Id.btnAddOne);
             Button subtractOneButton = FindViewById<Button>(Resource.Id.btnSubtractOne);
@@ -161,9 +167,9 @@ namespace EDHMTGLifeCounter
                 counterText.Text = ViewModel.CommanderDamageCounter.ToString();
 
             }
-            txthealt.Click += delegate { AddFiveHealth(); };
-            addOneButton.Click += delegate { AddOneHealth(mainActivityModel); };
-            subtractOneButton.Click += delegate { SubtractOneHealth(mainActivityModel); };
+            txthealt.Click += delegate { AddFiveHealth(conn); };
+            addOneButton.Click += delegate { AddOneHealth(mainActivityModel, conn); };
+            subtractOneButton.Click += delegate { SubtractOneHealth(mainActivityModel, conn); };
 
         }
 
@@ -173,7 +179,7 @@ namespace EDHMTGLifeCounter
             return dp;
         }
 
-        private void AddFiveHealth()
+        private void AddFiveHealth(SqliteConnection conn)
         {
             var selectedTab = ActionBar.SelectedTab;
 
@@ -207,6 +213,8 @@ namespace EDHMTGLifeCounter
                     {
                         txtHelth.Text = (mainActivityModel.Life).ToString();
                     }
+                    conn.UpdateLifeCounter(Translate(mainActivityModel));
+
                     HideKeyboard(amount, imm);
                     dia.Dismiss();
                 };
@@ -233,6 +241,8 @@ namespace EDHMTGLifeCounter
                     {
                         txtHelth.Text = (mainActivityModel.PoisonDamageCounter).ToString();
                     }
+                    conn.UpdateLifeCounter(Translate(mainActivityModel));
+
                     HideKeyboard(amount, imm);
                     dia.Dismiss();
                 };
@@ -259,6 +269,8 @@ namespace EDHMTGLifeCounter
                     {
                         txtHelth.Text = (mainActivityModel.CommanderDamageCounter).ToString();
                     }
+                    conn.UpdateLifeCounter(Translate(mainActivityModel));
+
                     HideKeyboard(amount, imm);
                     dia.Dismiss();
                 };
@@ -287,28 +299,33 @@ namespace EDHMTGLifeCounter
             imm.HideSoftInputFromWindow(pView.WindowToken, HideSoftInputFlags.None);
         }
 
-        private void AddOneHealth(ViewModel.LifeCounter ViewModel)
+        private void AddOneHealth(ViewModel.LifeCounter ViewModel, SqliteConnection conn)
         {
             TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
             if (ActionBar.SelectedTab.Position == 0)
             {
                 mainActivityModel.Life += 1;
                 txtHelth.Text = mainActivityModel.Life.ToString();
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
 
             }
             else if (ActionBar.SelectedTab.Position == 1)
             {
                 mainActivityModel.PoisonDamageCounter += 1;
                 txtHelth.Text = mainActivityModel.PoisonDamageCounter.ToString();
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
+
             }
             else if (ActionBar.SelectedTab.Position == 2)
             {
                 mainActivityModel.CommanderDamageCounter += 1;
                 txtHelth.Text = mainActivityModel.CommanderDamageCounter.ToString();
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
+
             }
         }
 
-        private void SubtractOneHealth(ViewModel.LifeCounter ViewModel)
+        private void SubtractOneHealth(ViewModel.LifeCounter ViewModel, SqliteConnection conn)
         {
             TextView txtHelth = FindViewById<TextView>(Resource.Id.txtHealth);
             if (ActionBar.SelectedTab.Position == 0)
@@ -323,6 +340,8 @@ namespace EDHMTGLifeCounter
                 {
                     txtHelth.Text = (mainActivityModel.Life).ToString();
                 }
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
+
 
             }
             else if (ActionBar.SelectedTab.Position == 1)
@@ -337,6 +356,7 @@ namespace EDHMTGLifeCounter
                 {
                     txtHelth.Text = (mainActivityModel.PoisonDamageCounter).ToString();
                 }
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
 
             }
             else if (ActionBar.SelectedTab.Position == 2)
@@ -351,6 +371,7 @@ namespace EDHMTGLifeCounter
                 {
                     txtHelth.Text = (mainActivityModel.CommanderDamageCounter).ToString();
                 }
+                conn.UpdateLifeCounter(Translate(mainActivityModel));
 
             }
 

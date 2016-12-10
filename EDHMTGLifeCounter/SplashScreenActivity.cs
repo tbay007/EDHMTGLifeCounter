@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace EDHMTGLifeCounter
 {
-    [Activity(Label = "EDH Life Counter", MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true, Icon = "@drawable/icon2")]
+    [Activity(Label = "EDH Life Counter", MainLauncher = true, Theme = "@style/Theme.Splash", NoHistory = true, Icon = "@drawable/ic_launcher")]
     public class SplashScreenActivity : Activity
     {
         private System.Timers.Timer _timer;
